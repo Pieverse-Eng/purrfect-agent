@@ -1,0 +1,75 @@
+{
+  "name": "purrfect",
+  "version": "0.1.0",
+  "description": "TypeScript agent runtime for terminal, editor (ACP), and chat apps — with durable memory and runtime skills.",
+  "type": "module",
+  "exports": {
+    "./core": "./dist/core/index.js"
+  },
+  "bin": {
+    "purrfect": "./dist/cli/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "chmod +x dist/cli/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "smoke": "vitest run --config vitest.smoke.config.ts"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pieverse-Eng/purrfect-agent.git"
+  },
+  "homepage": "https://github.com/Pieverse-Eng/purrfect-agent#readme",
+  "bugs": {
+    "url": "https://github.com/Pieverse-Eng/purrfect-agent/issues"
+  },
+  "keywords": [
+    "agent",
+    "ai",
+    "llm",
+    "cli",
+    "anthropic",
+    "acp",
+    "mcp",
+    "typescript",
+    "slack",
+    "discord",
+    "telegram",
+    "line",
+    "webhook",
+    "memory",
+    "skills"
+  ],
+  "author": "Pieverse",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^25.5.0",
+    "@types/node-cron": "^3.0.11",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.2"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.2.0",
+    "@line/bot-sdk": "^10.6.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@slack/bolt": "^4.6.0",
+    "better-sqlite3": "^12.8.0",
+    "discord.js": "^14.26.0",
+    "eventsource-parser": "^3.0.6",
+    "gpt-tokenizer": "^3.4.0",
+    "grammy": "^1.41.1",
+    "node-cron": "^4.2.1",
+    "yaml": "^2.8.3",
+    "zod": "^4.3.6"
+  }
+}

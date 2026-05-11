@@ -1,0 +1,35 @@
+# Build output
+dist/
+*.tsbuildinfo
+
+# Dependencies
+node_modules/
+
+# Editor / agent local state
+.claude/
+.codex
+.vscode/
+
+# Local config dirs (current and pre-rebrand name)
+.purrfect/
+.awesome-cli/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Frontend / framework caches (in case anyone runs a frontend tool here)
+.vite/
+.tanstack/
+.next/
+.nuxt/
+.turbo/
+
+# Deploy platform metadata
+.vercel/
+.netlify/
+
+# OS noise
+.DS_Store
+Thumbs.db
