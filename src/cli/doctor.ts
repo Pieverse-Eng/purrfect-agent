@@ -50,14 +50,21 @@ export async function runDoctor(configDir?: string): Promise<DoctorCheck[]> {
     results.push({ name: "api_key", status: "fail", message: "API key not set or unresolvable. Run 'purrfect setup'." });
   }
 
-  // 3. SQLite available
+  // 3. SQLite available — require() alone won't load the native binding, so
+  // instantiate against :memory: to actually exercise it.
   try {
     const { createRequire } = await import("node:module");
     const require = createRequire(import.meta.url);
-    require("better-sqlite3");
+    const Database = require("better-sqlite3");
+    const probe = new Database(":memory:");
+    probe.close();
     results.push({ name: "sqlite", status: "ok", message: "better-sqlite3 is available" });
-  } catch {
-    results.push({ name: "sqlite", status: "fail", message: "better-sqlite3 not available. Run 'npm install'." });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    const hint = /Could not locate the bindings|NODE_MODULE_VERSION/i.test(message)
+      ? " Rebuild for the current Node version: 'pnpm rebuild better-sqlite3' or 'npm rebuild better-sqlite3'."
+      : " Run 'npm install'.";
+    results.push({ name: "sqlite", status: "fail", message: `better-sqlite3 not available: ${message}.${hint}` });
   }
 
   // 4. Skills directory
